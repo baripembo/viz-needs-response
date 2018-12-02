@@ -49,7 +49,7 @@ class LineBarChart extends Component {
     };
 
     const sectorOptions = {
-      responsive: true,
+      maintainAspectRatio: false,
       tooltips: {
         mode: 'label',
         callbacks: {

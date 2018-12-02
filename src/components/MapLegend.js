@@ -65,10 +65,6 @@ const LinearGradient = styled.div`
 `;
 
 class MapLegend extends Component {
-  constructor() {
-    super();
-  }
-  
   componentDidMount() {
     // time to make a legend here
     // start by storing all color values in an array
@@ -98,28 +94,11 @@ class MapLegend extends Component {
         .attr("font-family", "HelveticaNeue-Bold, Helvetica, sans-serif")
         .attr("y", 20)
         .text("People in Need");
-
-
-
-    // add numbers as labels
-    // let labelsLegend = ["0-1","1-3","3-5","5-7","7-10","10-12","12-15",">15"];
-    
-    // svgLegend.append("g")
-    //     .attr("transform", "translate(0, 0)")
-    //     .selectAll("text")
-    //     .data(labelsLegend)
-    //     .enter()
-    //     .append("text")
-    //     .attr("font-size", "10px")
-    //     .attr("font-family", "HelveticaNeue-Light, Helvetica, sans-serif")
-    //     .attr("x", function(d, i){ return (i*30); })
-    //     .attr("y", 60)
-    //     .text(function(d){ return d; })
   }
   
   render() {
     return (
-      <Legend style={this.props.style}>
+      <Legend style={this.props.style} className={this.props.className}>
         <ScaleContainer>
           <Title>People in Need</Title>
           <Scale>

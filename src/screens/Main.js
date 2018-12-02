@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { hxlProxyToJSON, fetchJSON, formatValue } from "../util/helpers";
+import { hxlProxyToJSON, fetchJSON } from "../util/helpers";
 import { colors } from "../util/colors";
 import crossfilter from 'crossfilter';
 import KeyFigure from '../components/KeyFigure';
@@ -259,28 +259,37 @@ class Main extends Component {
               <KeyFigure value={this.state.keyFigures.orgsTotal} label={'ACTIVE ORGANIZATIONS'} source={'(3W 2018)'} />
             </KeyFiguresContainer>
             <VisualizationContainer>
-              <MapContainer geoData={this.state.mergedGeoData} regionData={this.state.mergedRegionData} handleRegionSelect={this.regionSelect.bind(this)}/> 
+              <MapContainer 
+                geoData={this.state.mergedGeoData} 
+                regionData={this.state.mergedRegionData} 
+                initialRegion={'Mopti'}
+                handleRegionSelect={this.regionSelect.bind(this)}
+              /> 
               <DetailContainer>
                 <div className='title'>Region: <h4 style={{display: 'inline-block', margin: '0'}}>{this.state.currentStats.region}</h4></div>
-                <LineBarChart
-                  height={260}
-                  width={400}
-                  labels={this.state.sectors}
-                  barColor={colors.color_coral}
-                  barData={this.state.currentPinSector}
-                  barTitle={'People in Need per Sector'}
-                  lineColor={colors.color_blue}
-                  lineData={this.state.currentOrgSector}
-                  lineTitle={'Active Orgs per Sector'}
-                />
-                <div className='detailInner'>
-                  <PieChart
-                    width={200}
-                    colors={[colors.color_coral, colors.color_gray_light]}
-                    data={[this.state.currentStats.pin, this.state.currentStats.pop-this.state.currentStats.pin]}
-                    labels={['People in need', '']}
-                    title={'% of population in need'}
+                <div className='mixedChartContainer'>
+                  <LineBarChart
+                    height={280}
+                    width={450}
+                    labels={this.state.sectors}
+                    barColor={colors.color_coral}
+                    barData={this.state.currentPinSector}
+                    barTitle={'People in Need per Sector'}
+                    lineColor={colors.color_blue}
+                    lineData={this.state.currentOrgSector}
+                    lineTitle={'Active Orgs per Sector'}
                   />
+                </div>
+                <div className='detailInner'>
+                  <div className='pieChartContainer' style={{width: '50%'}}>
+                    <PieChart
+                      width={200}
+                      colors={[colors.color_coral, colors.color_gray_light]}
+                      data={[this.state.currentStats.pin, this.state.currentStats.pop-this.state.currentStats.pin]}
+                      labels={['People in need', '']}
+                      title={'% of population in need'}
+                    />
+                  </div>
                   <DetailStats>
                     <KeyFigure
                       className='stat'
@@ -301,7 +310,7 @@ class Main extends Component {
                 </div>
               </DetailContainer>
             </VisualizationContainer>
-            <p><a href="https://data.humdata.org/dataset/mali-humanitarian-needs-overview" target="_blank">HNO Data</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://data.humdata.org/dataset/mali-3wop" target="_blank">3W Data</a></p>
+            <p><a href="https://data.humdata.org/dataset/mali-humanitarian-needs-overview" target="_blank" rel="noopener noreferrer">HNO Data</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://data.humdata.org/dataset/mali-3wop" target="_blank" rel="noopener noreferrer">3W Data</a></p>
           </React.Fragment>
         }
       </Container>

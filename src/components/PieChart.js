@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Pie } from "react-chartjs-2";
 
 class PieChart extends Component {
@@ -17,7 +16,8 @@ class PieChart extends Component {
     };
 
     let options = {
-      responsive: false,
+      responsive: true,
+      maintainAspectRatio: false,
       tooltips: {
         filter: function (tooltipItem, data) {
           if (tooltipItem.index===1)
